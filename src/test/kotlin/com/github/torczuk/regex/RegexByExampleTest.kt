@@ -225,4 +225,13 @@ class RegexByExampleTest {
         assertThat(result.value).isEqualTo(""""Pride & Prejudice"""")
         assertThat(result.next()!!.value).isEqualTo(""""The Hateful Eight"""")
     }
+
+    @Test
+    fun `should match but with prefix`() {
+        val text = """My web page is http://www.example.com """
+        val regex = Regex("(?<=http://)(.*?com)")
+
+        val result = regex.find(text)!!
+        assertThat(result.value).isEqualTo("www.example.com")
+    }
 }
